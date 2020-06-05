@@ -5,10 +5,14 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ProduitsRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ProduitsRepository::class)
- * @ApiResource
+ * @ApiResource(
+ *      normalizationContext={"groups"={"produits:read"}},
+ *      denormalizationContext={"groups"={"produits:write"}}
+ * )
  */
 class Produits
 {
@@ -16,31 +20,37 @@ class Produits
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"produits:read", "produits:write"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"produits:read", "produits:write"})
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"produits:read", "produits:write"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="decimal", precision=10, scale=0)
+     * @Groups({"produits:read", "produits:write"})
      */
     private $prixTTCunit;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"produits:read", "produits:write"})
      */
     private $image;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"produits:read", "produits:write"})
      */
     private $quantiteEnStock;
 
