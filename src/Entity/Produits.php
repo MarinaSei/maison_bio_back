@@ -21,6 +21,7 @@ class Produits
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      * @Groups({"produits:read", "produits:write"})
+     * @ORM\OneToMany(targetEntity=ProduitPanier::class, cascade={"persist", "remove"})
      */
     private $id;
 
